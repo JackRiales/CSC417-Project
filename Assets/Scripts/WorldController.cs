@@ -8,15 +8,7 @@ public class WorldController : MonoBehaviour {
 	public int worldHeight;
 
 	// Used as the base for blocks
-	public GameObject blockPrefab;
-
-	// Various materials for certain things
-	public Material dirt;
-	public Material rock;
-	public Material superRock;
-	public Material treasure;
-	public Material water;
-	public Material lava;
+	public Block blockPrefab;
 
 	// Base block scale.
 	private int blockSize;
@@ -50,14 +42,6 @@ public class WorldController : MonoBehaviour {
 
 		// Set up block count total
 		blockCount = Mathf.FloorToInt((worldWidth * worldHeight) / blockSize);
-
-		// Handle missing materials
-		if (!dirt) dirt = new Material (Shader.Find ("Standard"));
-		if (!rock) rock = new Material (Shader.Find ("Standard"));
-		if (!superRock) superRock = new Material (Shader.Find ("Standard"));
-		if (!treasure) treasure = new Material (Shader.Find ("Standard"));
-		if (!water) water = new Material (Shader.Find ("Standard"));
-		if (!lava) lava = new Material (Shader.Find ("Standard"));
 	}
 
 	void Start () {
