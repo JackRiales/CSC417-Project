@@ -16,6 +16,12 @@ public class WorldController : MonoBehaviour {
 	// Used as the base for blocks
 	public GameObject blockPrefab;
 
+	// Used as the destruction particle
+	public GameObject particlePrefab;
+
+	// For right now the occlusion collider
+	public Collider player;
+
 	// Base block scale.
 	private int blockSize;
 
@@ -48,6 +54,9 @@ public class WorldController : MonoBehaviour {
 
 		// Set up block count total
 		blockCount = (worldWidth * worldHeight);
+
+		// Debug
+		Debug.Log ("World generated with " + blockCount + " blocks.");
 	}
 
 	void Start () {
@@ -72,14 +81,22 @@ public class WorldController : MonoBehaviour {
 				// Generate a block
 				GameObject newBlock = (GameObject) Instantiate (
 					blockPrefab, 
-					new Vector3(transform.position.x + x + blockSize, transform.position.y * -1 + y + blockSize, transform.position.z), 
+					new Vector3(transform.position.x + x + blockSize, -(transform.position.y + y + blockSize), transform.position.z), 
 					Quaternion.identity);
+
+				// Set name
+				newBlock.name = "Block " + x + ", " + y;
 
 				// Set parent
 				if (blockParent)
 					newBlock.transform.parent = blockParent;
 				else
 					newBlock.transform.parent = this.transform;
+
+				// Add block component (change later for specifics)
+				Block blockComp = newBlock.AddComponent<Block>();
+				if (particlePrefab)
+					blockComp.destructionBlocks = particlePrefab;
 			}
 
 		}

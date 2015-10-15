@@ -20,12 +20,15 @@ public class Block : MonoBehaviour {
 	 */
 
 	void Awake() {
-		// If no material is set, use the standard diffuse
-		if (!material)
-			material = new Material (Shader.Find ("standard"));
+		// These must always be on the "block" layer
+		gameObject.layer = 9;
 	}
 
 	void Start() {
+		// If no material is set, use the standard diffuse
+		if (!material)
+			material = new Material (Shader.Find ("Standard"));
+
 		if (material)
 			GetComponent<Renderer> ().material = material;
 	}
@@ -37,17 +40,9 @@ public class Block : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter(Collision c) {
-		/*
-			if c is the player's attacking collider,
-			increment the hits down from whatever the power is
-			and then do some fun little effects
-		 */
-	}
-
 	void OnDestroy() {
 		// Push to log
-		Debug.Log("Block located at " + _xindex + ", " + _yindex + " was destroyed.");
+		// Debug.Log("Block located at " + _xindex + ", " + _yindex + " was destroyed.");
 
 		// Create the fun destructive blocks, only if they exist in the inspector AND have a rigidbody
 		if (destructionBlocks && destructionBlocks.GetComponent<Rigidbody> ()) {
