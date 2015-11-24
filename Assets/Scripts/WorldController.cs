@@ -97,6 +97,8 @@ public class WorldController : MonoBehaviour {
 				Block blockComp = newBlock.AddComponent<Block>();
 				if (particlePrefab)
 					blockComp.destructionBlocks = particlePrefab;
+				blockComp._xindex = x;
+				blockComp._yindex = y;
 			}
 
 		}

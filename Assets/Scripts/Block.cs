@@ -3,15 +3,18 @@ using System.Collections;
 
 public class Block : MonoBehaviour {
 
+	// World array coordinates
 	[HideInInspector]
-	public int _xindex, _yindex;
+	public int _xindex = 0, _yindex = 0;
 
+	// How many hits will the block need 
 	public int hitsToDestroy = 5;
 	public int spawnLayer = 0;
 	public int treasureCount = 0;
 	public Material material;
 	public GameObject destructionBlocks;
 
+	static int treasureMax = 10;
 	static int destructionBlockCount = 6;
 	static int destructionBlockTTL = 3;
 
